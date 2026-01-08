@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ClimaLocal</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>Clima<span>Local</span></h1>
+
+        <nav>
+            <input type="text" id="busqueda-ciudad" placeholder="Ciudad...">
+            <button id="boton-buscar">Buscar</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="clima-actual">
+            <h2 id="nombre-ciudad">Nombre de la Ciudad</h2>
+            <img id="icono-clima" src="" alt="Icono">
+            <p id="temperatura-actual">--°C</p>
+            <p id="descripcion-clima">Estado del cielo</p>
+        </section>
+
+        <section id="seccion-horas">
+            <h3>Pronóstico por horas</h3>
+            <div id="contenedor-horas">
+            </div>
+        </section>
+
+        <section id="seccion-días">
+            <h3>Próximos 7 días</h3>
+            <div id="contenedor-dias">
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Datos de Open-Meteo</p>
+    </footer>
+
+</body>
+
+</html>
