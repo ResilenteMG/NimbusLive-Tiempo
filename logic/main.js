@@ -33,21 +33,20 @@ async function llamarAPI(url) {
 
         if (datos.cod === 200) {
             actualizarInterfaz(datos);
-        } else if (datos.cod === 401) {
-
-            mostrarError("API en proceso de activación. Espera unos minutos.");
+            lucide.createIcons(); 
+        } else if (datos.cod === "404") {
+            mostrarError("Ciudad o localidad no encontrada. Intenta con una más principal.");
         } else {
-            mostrarError("Ciudad no encontrada.");
+            mostrarError("Error en la consulta: " + datos.message);
         }
     } catch (error) {
         console.error("Error de conexión:", error);
-        mostrarError("Error al conectar con el servidor.");
+        mostrarError("Error al conectar con el servidor. Revisa tu internet.");
     }
 }
 
-
 function actualizarInterfaz(datos) {
-    // Aseguramos que los IDs coincidan con tu index.html
+    
     document.getElementById('city-name').textContent = `${datos.name}, ${datos.sys.country}`;
     document.getElementById('temp-display').textContent = `${Math.round(datos.main.temp)}°C`;
     document.getElementById('weather-desc').textContent = datos.weather[0].description;
@@ -55,6 +54,7 @@ function actualizarInterfaz(datos) {
     document.getElementById('wind-display').textContent = `${Math.round(datos.wind.speed * 3.6)} km/h`;
     
     console.log("Datos cargados con éxito para:", datos.name);
+    lucide.createIcons();
 }
 
 function buscarPorCiudad(ciudad) {
