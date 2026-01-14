@@ -1,93 +1,158 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NimbusLive - Clima en tiempo real</title>
-
+    <title>NimbusLive | Premium Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <style type="text/tailwindcss">
-@keyframes gradient-move {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-.container-main {
-    @apply min-h-screen flex flex-col items-center justify-center p-6;
-    /* Colores: Azul profundo, Violeta y Azul Eléctrico */
-    background: linear-gradient(-45deg, #0f172a, #1e1b4b, #312e81, #1e3a8a);
-    background-size: 400% 400%;
-    animation: gradient-move 15s ease infinite;
-}
-
-.card-weather-main {
-    @apply w-full max-w-md bg-white/5 backdrop-blur-xl border border-white/10 rounded-[3rem] p-12 text-center shadow-2xl;
-    /* Añadimos un brillo sutil en el borde */
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.3), inset 0 0 1px 1px rgba(255, 255, 255, 0.1);
-}
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="styles/styles.css">
+    
+    <style>
+        body {
+            background-color: #020617 !important;
+            background-image: radial-gradient(circle at 50% 50%, #0f172a 0%, #020617 100%) !important;
+            color: #f8fafc;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* LLUVIA SUTIL */
+        #rain-canvas {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 50;
+        }
+        .rain-drop {
+            position: absolute;
+            background: linear-gradient(to bottom, transparent, #60a5fa);
+            width: 1px; height: 80px; opacity: 0.15;
+            animation: fall linear infinite;
+        }
+        @keyframes fall { to { transform: translateY(100vh); } }
+
+        /* EL SOL (Aura detrás del logo) */
+        .sun-aura {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 280px; height: 280px;
+            background: radial-gradient(circle, rgba(253, 224, 71, 0.35) 0%, rgba(234, 179, 8, 0.1) 70%, transparent 100%);
+            filter: blur(45px);
+            z-index: 1;
+            animation: pulse-sun 4s ease-in-out infinite;
+        }
+        @keyframes pulse-sun {
+            0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        /* NÚMERO GIGANTE ESTILO PREMIUM */
+        #temp-display {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 14rem;
+            line-height: 0.8;
+            background: linear-gradient(to bottom, #ffffff 50%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.5));
+        }
+
+        /* CONTENEDOR DE ICONO */
+        #weather-icon-container svg {
+            width: 70px; height: 70px;
+            stroke-width: 1.5; color: #facc15;
+            filter: drop-shadow(0 0 15px rgba(250, 204, 21, 0.4));
+        }
+
+        .glass-card {
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 4rem;
+            padding: 3.5rem;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            z-index: 20;
+        }
+
+        .logo-blend { mix-blend-mode: screen; position: relative; z-index: 10; }
+
+        /* BOTÓN BUSCAR */
+        .btn-buscar {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+        }
+        .btn-buscar:hover {
+            background: rgba(59, 130, 246, 0.3);
+            border-color: #60a5fa;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+            color: white;
+        }
+    </style>
 </head>
+<body>
+    <div id="rain-canvas"></div>
 
-<body class="bg-[#0f172a] text-white antialiased">
+    <header class="relative w-full py-16 flex justify-center items-center overflow-visible">
+        <div class="relative">
+            <div class="sun-aura"></div>
+            <img src="assets/icons/imag/logo NimbusLive.png" alt="NimbusLive" class="max-w-[280px] h-auto logo-blend">
+        </div>
+    </header>
 
-    <main class="container-main flex-grow flex items-center justify-center p-4">
-
-        <section
-            class="card-weather-main w-full max-w-md bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20 shadow-2xl">
-
-            <section class="w-full flex gap-2 mb-8">
-                <input type="text" id="search-input" placeholder="Buscar ciudad..."
-                    class="bg-white/10 border border-white/20 rounded-xl px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400">
-                <button id="btn-search" class="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-xl transition-all">
-                    Buscar
+    <main class="flex-grow relative z-20 flex flex-col items-center justify-center px-4 -mt-10">
+        
+        <div class="mb-10 w-full max-w-[450px] relative">
+            <div class="relative flex items-center bg-black/50 border border-white/10 rounded-2xl px-5 py-2 backdrop-blur-md">
+                <i class="fas fa-search text-blue-500/30 ml-2 mr-4"></i>
+                <input type="text" id="city-input" placeholder="BUSCAR CIUDAD..." 
+                       class="bg-transparent border-none outline-none text-white text-[10px] tracking-[0.3em] w-full placeholder:text-white/10 uppercase font-bold">
+                <button id="search-btn" class="btn-buscar text-blue-400 text-[9px] font-black tracking-widest uppercase px-6 py-3 rounded-xl ml-2">
+                    BUSCAR
                 </button>
-            </section>
-
-            <div id="weather-icon" class="flex justify-center mt-2 mb-6">
-                <i data-lucide="sun" style="width: 80px; height: 80px;" class="text-yellow-400 animate-spin-slow"></i>
             </div>
-            <header class="text-center">
-                <h2 id="city-name" class="text-2xl font-light opacity-80">Cargando...</h2>
-                <p class="text-sm uppercase tracking-widest opacity-60">Hoy</p>
-            </header>
+        </div>
 
-            <div class="my-8 text-center">
-                <h1 id="temp-display"
-                    class="text-8xl font-bold bg-gradient-to-b from-white to-blue-300 bg-clip-text text-transparent">
-                    --°
-                </h1>
-                <p id="weather-desc" class="text-xl mt-2 font-medium capitalize">Detectando ubicación...</p>
-            </div>
-
-            <div class="flex justify-around border-t border-white/10 pt-6 mt-6">
-                <div class="text-center">
-                    <p class="text-xs opacity-50 uppercase">Humedad</p>
-                    <p id="humidity-display" class="font-semibold">--%</p>
+        <section class="glass-card">
+            <h2 id="city-name" class="text-[11px] opacity-30 tracking-[0.8em] uppercase mb-10 overflow-hidden whitespace-nowrap text-ellipsis">Sincronizando...</h2>
+            
+            <div class="flex flex-col items-center mb-12">
+                <div id="weather-icon-container" class="mb-6">
+                    <i data-lucide="cloud-sun"></i>
                 </div>
-                <div class="text-center">
-                    <p class="text-xs opacity-50 uppercase">Viento</p>
-                    <p id="wind-display" class="font-semibold">-- km/h</p>
+
+                <div class="flex items-start">
+                    <span id="temp-display">--</span>
+                    <span class="text-6xl mt-12 opacity-10 ml-2">°</span>
+                </div>
+                <p id="weather-desc" class="text-blue-400/60 mt-6 tracking-[0.6em] text-[10px] uppercase">Conexión Segura</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-10 border-t border-white/5 pt-10">
+                <div>
+                    <p class="text-[8px] opacity-20 uppercase font-bold tracking-widest mb-3">Humedad</p>
+                    <p id="humidity-display" class="text-5xl font-normal" style="font-family:'Bebas Neue'">--%</p>
+                </div>
+                <div>
+                    <p class="text-[8px] opacity-20 uppercase font-bold tracking-widest mb-3">Viento</p>
+                    <p id="wind-display" class="text-5xl font-normal" style="font-family:'Bebas Neue'">--</p>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="mt-auto">
-        <p align="center" class="py-8 opacity-80">
-            Designed with ❤️ by
-            <a href="https://github.com/ResilenteMG" target="_blank">
-                <img src="https://img.shields.io/badge/GitHub-100000?style=flat&logo=github&logoColor=white"
-                    alt="GitHub" style="vertical-align: middle;">
-            </a>
-        </p>
+    <footer class="py-12 opacity-10 text-[8px] tracking-[0.5em] uppercase text-center">
+        NimbusLive Premium Dashboard &copy; 2026
     </footer>
-    <script src="logic/main.js"></script>
 
+    <script src="main.js"></script>
 </body>
-
 </html>
