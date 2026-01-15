@@ -8,86 +8,62 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <style type="text/tailwindcss">
-@keyframes gradient-move {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-.container-main {
-    @apply min-h-screen flex flex-col items-center justify-center p-6;
-    /* Colores: Azul profundo, Violeta y Azul Eléctrico */
-    background: linear-gradient(-45deg, #0f172a, #1e1b4b, #312e81, #1e3a8a);
-    background-size: 400% 400%;
-    animation: gradient-move 15s ease infinite;
-}
-
-.card-weather-main {
-    @apply w-full max-w-md bg-white/5 backdrop-blur-xl border border-white/10 rounded-[3rem] p-12 text-center shadow-2xl;
-    /* Añadimos un brillo sutil en el borde */
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.3), inset 0 0 1px 1px rgba(255, 255, 255, 0.1);
-}
-    </style>
-    <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 
-<body class="bg-[#0f172a] text-white antialiased">
+<body class="bg-cover bg-center text-white antialiased flex flex-col min-h-screen"
+    style="background-image: url('./assets/icons/imag/Beach.jpg');"></body>
 
-    <main class="container-main flex-grow flex items-center justify-center p-4">
+<main class="flex-grow flex flex-col justify-center">
+    <header class="w-full flex flex-col mb-10 pr-10">
+    <div class="self-end bg-black/40 backdrop-blur-md p-6 rounded-3xl mb-6 border border-white/10 shadow-2xl">
+        <img src="./assets/icons/imag/logo NimbusLive.png" alt="Logo" class="h-32 w-auto">
+    </div>
+    
+    <div class="flex gap-2 self-center bg-black/20 p-2 rounded-xl backdrop-blur-md border border-white/10">
+        <input type="text" id="cityInput" placeholder="Buscar ciudad..." 
+               class="bg-white/90 text-slate-900 placeholder:text-slate-500 px-4 py-2 rounded-lg outline-none w-64 font-semibold">
+        
+        <button id="searchBtn" 
+                class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-bold transition-colors shadow-lg">
+            Buscar
+        </button>
+    </div>
+</header>
 
-        <section
-            class="card-weather-main w-full max-w-md bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20 shadow-2xl">
+   <section class="card-weather-main mt-10">
+    <div class="max-w-md mx-auto bg-white/20 backdrop-blur-xl border border-white/30 rounded-3xl p-8 shadow-2xl">
+        <div class="text-center">
+            <h2 class="text-5xl font-black uppercase tracking-tighter text-slate-900" 
+                style="text-shadow: 0 0 15px rgba(255,255,255,0.6);">
+                Madrid, ES
+            </h2>
+            
+            <p class="text-blue-800 font-bold tracking-widest text-xs mt-2">HOY</p>
+            
+            <p class="text-8xl font-black text-slate-900 my-6">
+                18°C
+            </p>
+            
+            <p class="text-lg font-bold uppercase tracking-widest bg-slate-900 text-white px-8 py-3 rounded-full inline-block shadow-lg">
+                Cielo Despejado
+            </p>
+        </div>
+    </div>
+</section>
 
-            <section class="w-full flex gap-2 mb-8">
-                <input type="text" id="search-input" placeholder="Buscar ciudad..."
-                    class="bg-white/10 border border-white/20 rounded-xl px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400">
-                <button id="btn-search" class="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-xl transition-all">
-                    Buscar
-                </button>
-            </section>
+</main>
+<footer>
+    <p align="center" class="py-2 opacity-60 text-xs">
+        Designed with ❤️ by
+        <a href="https://github.com/ResilenteMG" target="_blank" class="inline-block ml-1">
+            <img src="https://img.shields.io/badge/GitHub-100000?style=flat&logo=github&logoColor=white" alt="GitHub">
+        </a>
+    </p>
+</footer>
 
-            <div id="weather-icon" class="flex justify-center mt-2 mb-6">
-                <i data-lucide="sun" style="width: 80px; height: 80px;" class="text-yellow-400 animate-spin-slow"></i>
-            </div>
-            <header class="text-center">
-                <h2 id="city-name" class="text-2xl font-light opacity-80">Cargando...</h2>
-                <p class="text-sm uppercase tracking-widest opacity-60">Hoy</p>
-            </header>
 
-            <div class="my-8 text-center">
-                <h1 id="temp-display"
-                    class="text-8xl font-bold bg-gradient-to-b from-white to-blue-300 bg-clip-text text-transparent">
-                    --°
-                </h1>
-                <p id="weather-desc" class="text-xl mt-2 font-medium capitalize">Detectando ubicación...</p>
-            </div>
-
-            <div class="flex justify-around border-t border-white/10 pt-6 mt-6">
-                <div class="text-center">
-                    <p class="text-xs opacity-50 uppercase">Humedad</p>
-                    <p id="humidity-display" class="font-semibold">--%</p>
-                </div>
-                <div class="text-center">
-                    <p class="text-xs opacity-50 uppercase">Viento</p>
-                    <p id="wind-display" class="font-semibold">-- km/h</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="mt-auto">
-        <p align="center" class="py-8 opacity-80">
-            Designed with ❤️ by
-            <a href="https://github.com/ResilenteMG" target="_blank">
-                <img src="https://img.shields.io/badge/GitHub-100000?style=flat&logo=github&logoColor=white"
-                    alt="GitHub" style="vertical-align: middle;">
-            </a>
-        </p>
-    </footer>
-    <script src="logic/main.js"></script>
-
+<script src="main.js"></script>
 </body>
 
 </html>
