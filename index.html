@@ -9,6 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <link rel="stylesheet" href="styles/styles.css">
+   <script src="https://unpkg.com/lucide@latest"></script> 
 </head>
 
 <body class="bg-cover bg-center text-white antialiased flex flex-col min-h-screen"
@@ -16,42 +17,43 @@
 
 <main class="flex-grow flex flex-col justify-center">
     <header class="w-full flex flex-col mb-10 pr-10">
-    <div class="self-end bg-black/40 backdrop-blur-md p-6 rounded-3xl mb-6 border border-white/10 shadow-2xl">
-        <img src="./assets/icons/imag/logo NimbusLive.png" alt="Logo" class="h-32 w-auto">
+  
+<div class="self-end mb-6 p-4 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 shadow-lg">
+    <img src="assets/icons/imag/logo NimbusLive.png" alt="Logo" 
+         class="h-24 w-auto brightness-150 contrast-125 drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
+</div>
+  <div class="flex gap-2 mb-8 justify-center">
+    <input type="text" id="cityInput" placeholder="Buscar ciudad..." 
+           class="bg-white/20 backdrop-blur-md text-white border border-white/20 px-4 py-2 rounded-xl outline-none w-64">
+    <button id="searchBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-xl font-bold transition-all">
+        Buscar
+    </button>
+</div>
+</header>
+<main>
+  <section class="mt-10">
+   <div class="max-w-md mx-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-[2.5rem] p-10 shadow-2xl flex flex-col items-center">
+    
+    <h2 id="cityName" class="text-5xl font-bold tracking-tighter text-white drop-shadow-md">
+        Cargando...
+    </h2>
+
+    <p class="text-blue-200 font-bold tracking-widest text-xs mt-2 uppercase">Hoy</p>
+<div id="weather-icon" class="text-white mb-4">
+    </div>
+
+    
+    <p id="temp" class="text-8xl font-black text-white my-6 drop-shadow-lg">
+        --°C
+    </p>
+
+    <div id="description" class="bg-black/20 backdrop-blur-sm text-white px-8 py-3 rounded-full font-bold uppercase tracking-wider text-sm border border-white/10">
+        Buscando clima...
     </div>
     
-    <div class="flex gap-2 self-center bg-black/20 p-2 rounded-xl backdrop-blur-md border border-white/10">
-        <input type="text" id="cityInput" placeholder="Buscar ciudad..." 
-               class="bg-white/90 text-slate-900 placeholder:text-slate-500 px-4 py-2 rounded-lg outline-none w-64 font-semibold">
-        
-        <button id="searchBtn" 
-                class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-bold transition-colors shadow-lg">
-            Buscar
-        </button>
-    </div>
-</header>
-
-   <section class="card-weather-main mt-10">
-    <div class="max-w-md mx-auto bg-white/20 backdrop-blur-xl border border-white/30 rounded-3xl p-8 shadow-2xl">
-        <div class="text-center">
-            <h2 class="text-5xl font-black uppercase tracking-tighter text-slate-900" 
-                style="text-shadow: 0 0 15px rgba(255,255,255,0.6);">
-                Madrid, ES
-            </h2>
-            
-            <p class="text-blue-800 font-bold tracking-widest text-xs mt-2">HOY</p>
-            
-            <p class="text-8xl font-black text-slate-900 my-6">
-                18°C
-            </p>
-            
-            <p class="text-lg font-bold uppercase tracking-widest bg-slate-900 text-white px-8 py-3 rounded-full inline-block shadow-lg">
-                Cielo Despejado
-            </p>
-        </div>
-    </div>
+</div>
+    
 </section>
-
 </main>
 <footer>
     <p align="center" class="py-2 opacity-60 text-xs">
@@ -63,7 +65,7 @@
 </footer>
 
 
-<script src="main.js"></script>
+<script src="./logic/main.js"></script>
 </body>
 
 </html>

@@ -11,7 +11,9 @@
         background-position: center;
         background-attachment: fixed;
     }
-
+body {
+    font-family: 'Poppins', sans-serif;
+}
     header {
         /* Centra el buscador y NIMBUS */
         @apply w-full flex flex-col items-center justify-center mb-10;
