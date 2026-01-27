@@ -26,7 +26,8 @@ El diseño de la interfaz se basa en la tendencia **Glassmorphism**, caracteriza
 ---
 
 ## 📸 Capturas de Pantalla
-*(Próximamente: Aquí irán las imágenes del diseño final)*
+
+![Captura de pantalla_27-1-2026_23824_127 0 0 1](https://github.com/user-attachments/assets/37a6fd69-625b-4c47-a42b-8201509ae528)
 
 ---
 
