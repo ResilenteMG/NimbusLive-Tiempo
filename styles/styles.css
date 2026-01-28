@@ -11,8 +11,30 @@
         background-position: center;
         background-attachment: fixed;
     }
+    /* Recuperamos tu fondo gris original */
 body {
-    font-family: 'Poppins', sans-serif;
+    background-color: #1f2937 !important;
+    /* Cambia 'overflow: hidden' por esto: */
+    overflow-x: hidden; 
+    overflow-y: auto; 
+}
+
+/* La Brisa Dinámica */
+.brisa-efecto {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200%; /* Más ancha para que se mueva */
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+    z-index: -1; /* Detrás de la tarjeta */
+    pointer-events: none;
+    animation: moverBrisa 10s linear infinite;
+}
+
+@keyframes moverBrisa {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0%); }
 }
     header {
         /* Centra el buscador y NIMBUS */
@@ -35,4 +57,16 @@ body {
         @apply bg-blue-500 hover:bg-blue-600 px-6 py-4 rounded-2xl font-bold 
                transition-all text-white active:scale-95;
     }
+}
+.forecast-card {
+    @apply bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 min-w-[100px] flex flex-col items-center text-white;
+}
+
+/* Ocultar la barra de scroll para que se vea más limpio */
+.forecast-row::-webkit-scrollbar {
+    display: none;
+}
+.forecast-row {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
