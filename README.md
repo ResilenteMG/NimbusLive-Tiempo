@@ -22,7 +22,7 @@ El diseño de la interfaz se basa en la tendencia **Glassmorphism**, caracteriza
 | **GitHub Issues** | Gestión de tareas y control de progreso. |
 | **Canva** | Diseño de identidad visual y presentación. |
 
-**"El despliegue de la aplicación se realizó mediante GitHub Pages, utilizando la rama principal (main) como fuente estable para la entrega continua de la interfaz al usuario final."**
+**"El despliegue de la aplicación se realizó mediante GitHub Pages, utilizando la rama principal (main) como fuente estable para la entrega continua de la interfaz al usuario final."**  GITHUB Pages:   https://resilentemg.github.io/NimbusLive-Tiempo/
 ## 📸 Capturas de Pantalla
 
 ![Captura de pantalla_27-1-2026_23824_127 0 0 1](https://github.com/user-attachments/assets/37a6fd69-625b-4c47-a42b-8201509ae528)
