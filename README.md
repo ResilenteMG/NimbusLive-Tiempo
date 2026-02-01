@@ -33,6 +33,15 @@ El diseño de la interfaz se basa en la tendencia **Glassmorphism**, caracteriza
 2. Abre el archivo `index.html` con la extensión **Live Server** en Visual Studio Code.
 3. ¡Disfruta de la experiencia visual!
 
+## ⚖️ Licencia
+
+Este proyecto está bajo la **Licencia MIT**. Esto significa que puedes usar, copiar y modificar el código libremente, siempre que se mantenga el aviso de autoría.
+
+Para más detalles, puedes consultar el archivo completo aquí: [LICENSE](./LICENSE)
+
+---
+*Desarrollado con fines educativos como parte del proyecto NimbusLive.*
+
 <p align="center">
   Diseñado con ❤️ por <b>MELISSA GÓMEZ</b> 
   <a href="https://github.com/ResilenteMG">
