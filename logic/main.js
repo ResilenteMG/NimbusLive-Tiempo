@@ -7,19 +7,18 @@ async function llamarAPI(url) {
         const datos = await respuesta.json();
 
         if (datos.cod === 200) {
-            // 1. Datos principales
+
             document.getElementById('cityName').textContent = `${datos.name}, ${datos.sys.country}`;
             document.getElementById('temp').textContent = `${Math.round(datos.main.temp)}°C`;
             document.getElementById('description').textContent = datos.weather[0].description.toUpperCase();
             
-            // 2. Icono principal
+            
             const iconContainer = document.getElementById('weather-icon');
             iconContainer.innerHTML = `<img src="https://openweathermap.org/img/wn/${datos.weather[0].icon}@2x.png" class="w-20 h-20">`;
 
-            // 3. Fondo
+
             if (typeof aplicarFondoDinamico === 'function') aplicarFondoDinamico(datos.weather[0].main);
 
-            // 4. PRONÓSTICO (Esto rellena las horas y días)
             const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${datos.name}&units=metric&lang=es&appid=${API_KEY}`;
             const resForecast = await fetch(urlForecast);
             const dataForecast = await resForecast.json();
@@ -34,7 +33,7 @@ async function llamarAPI(url) {
         console.error("Error:", error);
     }
 }
-// Configuración al cargar la página
+
 window.addEventListener('DOMContentLoaded', () => {
     // 1. Iniciar con Castellón por geolocalización
     navigator.geolocation.getCurrentPosition(
@@ -43,12 +42,12 @@ window.addEventListener('DOMContentLoaded', () => {
             llamarAPI(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric&lang=es`);
         },
         () => {
-            // Si el usuario no da permiso, cargamos Castellón por nombre
+        
             llamarAPI(`https://api.openweathermap.org/data/2.5/weather?q=Castellon&appid=${API_KEY}&units=metric&lang=es`);
         }
     );
 
-    // 2. Configurar el botón de búsqueda
+
     const boton = document.getElementById('searchBtn');
     const entrada = document.getElementById('cityInput');
 
@@ -61,7 +60,7 @@ window.addEventListener('DOMContentLoaded', () => {
 function aplicarFondoDinamico(clima) {
     const body = document.body;
     
-    // Si no existe la capa de brisa, la creamos
+    
     let brisa = document.querySelector('.brisa-efecto');
     if (!brisa) {
         brisa = document.createElement('div');
@@ -69,7 +68,7 @@ function aplicarFondoDinamico(clima) {
         body.appendChild(brisa);
     }
 
-    // Solo cambiamos la velocidad o transparencia según el clima
+    
     if (clima === 'Rain' || clima === 'Clouds') {
         brisa.style.opacity = "0.5"; // Se nota un poco más
     } else {
@@ -80,11 +79,11 @@ function mostrarPronostico(lista) {
     const contenedorHoras = document.getElementById('hourly-forecast');
     const contenedorDias = document.getElementById('daily-forecast');
     
-    // Limpiamos lo que haya antes
+
     contenedorHoras.innerHTML = '';
     contenedorDias.innerHTML = '';
 
-    // 1. Renderizar PRÓXIMAS HORAS (Carrusel horizontal)
+    
     lista.slice(0, 8).forEach(item => {
         const fecha = new Date(item.dt * 1000);
         const hora = fecha.getHours() + ":00";
@@ -100,8 +99,7 @@ function mostrarPronostico(lista) {
         contenedorHoras.appendChild(card);
     });
 
-    // 2. Renderizar PRÓXIMOS DÍAS (Lista vertical)
-    // Filtramos para obtener solo un dato por día (el del mediodía)
+
     const pronosticosDiarios = lista.filter(item => item.dt_txt.includes("12:00:00"));
     
     pronosticosDiarios.forEach(item => {

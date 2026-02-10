@@ -4,27 +4,26 @@
 
 @layer components {
     .container-main {
-        /* min-h-screen obliga a que el fondo ocupe TODA la pantalla */
+
         @apply min-h-screen w-full flex flex-col items-center justify-center p-6;
         background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.4)), url('../assets/icons/imag/Beach.jpg');
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
     }
-    /* Recuperamos tu fondo gris original */
+
 body {
     background-color: #1f2937 !important;
-    /* Cambia 'overflow: hidden' por esto: */
     overflow-x: hidden; 
     overflow-y: auto; 
 }
 
-/* La Brisa Dinámica */
+
 .brisa-efecto {
     position: fixed;
     top: 0;
     left: 0;
-    width: 200%; /* Más ancha para que se mueva */
+    width: 200%;
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
     z-index: -1; /* Detrás de la tarjeta */
@@ -42,7 +41,7 @@ body {
     }
 
     .card-weather-main {
-        /* Centra el texto de Madrid y el clima */
+
         @apply w-full max-w-md bg-white/10 backdrop-blur-xl border border-white/20 
                rounded-[3rem] p-10 flex flex-col items-center justify-center shadow-2xl text-white;
     }
@@ -62,11 +61,15 @@ body {
     @apply bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 min-w-[100px] flex flex-col items-center text-white;
 }
 
-/* Ocultar la barra de scroll para que se vea más limpio */
 .forecast-row::-webkit-scrollbar {
     display: none;
 }
 .forecast-row {
     -ms-overflow-style: none;
     scrollbar-width: none;
+}
+.contenedor-horas {
+    display: flex;
+    flex-wrap: wrap; /* Esto hará que bajen a la siguiente línea si no caben */
+    justify-content: center;
 }
