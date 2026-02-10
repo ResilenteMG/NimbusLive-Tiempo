@@ -22,7 +22,7 @@ El diseño de la interfaz se basa en la tendencia **Glassmorphism**, caracteriza
 | **GitHub Issues** | Gestión de tareas y control de progreso. |
 | **Canva** | Diseño de identidad visual y presentación. |
 
-
+**"El despliegue de la aplicación se realizó mediante GitHub Pages, utilizando la rama principal (main) como fuente estable para la entrega continua de la interfaz al usuario final."**  GITHUB Pages:   https://resilentemg.github.io/NimbusLive-Tiempo/
 ## 📸 Capturas de Pantalla
 
 ![Captura de pantalla_27-1-2026_23824_127 0 0 1](https://github.com/user-attachments/assets/37a6fd69-625b-4c47-a42b-8201509ae528)
@@ -32,6 +32,15 @@ El diseño de la interfaz se basa en la tendencia **Glassmorphism**, caracteriza
 1. Clona este repositorio.
 2. Abre el archivo `index.html` con la extensión **Live Server** en Visual Studio Code.
 3. ¡Disfruta de la experiencia visual!
+
+## ⚖️ Licencia
+
+Este proyecto está bajo la **Licencia MIT**. Esto significa que puedes usar, copiar y modificar el código libremente, siempre que se mantenga el aviso de autoría.
+
+Para más detalles, puedes consultar el archivo completo aquí: [LICENSE](./LICENSE)
+
+---
+*Desarrollado con fines educativos como parte del proyecto NimbusLive.*
 
 <p align="center">
   Diseñado con ❤️ por <b>MELISSA GÓMEZ</b> 
